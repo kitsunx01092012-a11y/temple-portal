@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temple Portal | Aniket Edition</title>
+    <style>
+        :root {
+            --primary: #0047AB;
+            --accent: #00D2FF;
+            --bg: #f0f4f8;
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --text-main: #1a202c;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        body {
+            background: radial-gradient(circle at top right, #e0eafc, #cfdef3);
+            color: var(--text-main);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Profile Header */
+        .profile-header {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 50px 20px;
+            border-bottom: 1px solid rgba(0, 71, 171, 0.1);
+            display: flex;
+            justify-content: center;
+        }
+
+        .profile-container {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            max-width: 900px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .designer-image {
+            width: 160px;
+            height: 160px;
+            /* Unique "Aura" Shape */
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            object-fit: cover;
+            border: 4px solid var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 71, 171, 0.2);
+            transition: var(--transition);
+        }
+
+        .designer-image:hover {
+            border-radius: 50%;
+            transform: rotate(-3deg) scale(1.05);
+            box-shadow: 0 25px 50px rgba(0, 71, 171, 0.3);
+        }
+
+        .designer-name {
+            font-size: 2.8rem;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0;
+            font-weight: 800;
+        }
+
+        .designer-title {
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: #555;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        /* Search Section */
+        .search-container {
+            margin: 40px auto;
+            max-width: 600px;
+            position: relative;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 18px 30px;
+            border-radius: 50px;
+            border: 2px solid transparent;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            font-size: 1.1rem;
+            transition: var(--transition);
+            box-sizing: border-box;
+        }
+
+        input[type="text"]:focus {
+            transform: translateY(-2px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 40px rgba(0, 71, 171, 0.15);
+            outline: none;
+        }
+
+        /* The Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.4);
+            border-radius: 24px;
+            padding: 35px;
+            text-decoration: none;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            background: white;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin: 0 0 8px 0;
+            font-size: 1.5rem;
+        }
+
+        .card span {
+            color: #777;
+            font-size: 0.95rem;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .profile-container { flex-direction: column; text-align: center; }
+            .designer-image { width: 140px; height: 140px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="profile-header">
+        <div class="profile-container">
+            <!-- YOUR DIRECT IMAGE LINK APPLIED HERE -->
+            <img src="https://i.postimg.cc/mrQTpQWj/aniket-jpg.jpg" alt="Aniket" class="designer-image">
+            <div class="designer-info">
+                <h2 class="designer-name">Aniket</h2>
+                <p class="designer-title">Lead Designer & Creator</p>
+                <p style="max-width: 500px; color: #444; margin-top: 15px;">Building digital gateways to spiritual destinations. This portal connects you to major temples worldwide with elite precision.</p>
+            </div>
+        </div>
+    </header>
+
+    <main style="padding: 20px;">
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search for a temple or city..." onkeyup="filterTemples()">
+        </div>
+
+        <div class="grid" id="templeGrid">
+            <a href="https://www.tirumala.org/" class="card" target="_blank">
+                <h3>Tirupati Balaji</h3>
+                <span>Andhra Pradesh, India</span>
+            </a>
+            <a href="https://shashwatdham.org/" class="card" target="_blank">
+                <h3>Shashwat Dham</h3>
+                <span>Nawalparasi, Nepal</span>
+            </a>
+            <a href="https://www.baps.org/Global-Network/India/NewDelhi.aspx" class="card" target="_blank">
+                <h3>Akshardham</h3>
+                <span>New Delhi, India</span>
+            </a>
+            <a href="https://www.shrisiddhivinayak.org/" class="card" target="_blank">
+                <h3>Siddhivinayak</h3>
+                <span>Mumbai, India</span>
+            </a>
+            <a href="https://vashisthajayanthi.com/" class="card" target="_blank">
+                <h3>Kashi Vishwanath</h3>
+                <span>Varanasi, India</span>
+            </a>
+            <a href="https://www.goldentempleamritsar.org/" class="card" target="_blank">
+                <h3>Golden Temple</h3>
+                <span>Amritsar, India</span>
+            </a>
+        </div>
+    </main>
+
+    <script>
+        function filterTemples() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.getElementsByClassName('card');
+            
+            Array.from(cards).forEach(card => {
+                let title = card.querySelector('h3').innerText.toLowerCase();
+                let location = card.querySelector('span').innerText.toLowerCase();
+                
+                if (title.includes(input) || location.includes(input)) {
+                    card.style.display = "flex";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+    </script>
+</body>
+</html>
